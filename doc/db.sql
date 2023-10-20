@@ -5,3 +5,4 @@ create table `test`(
     primary key(id)
 )engine=innodb default charset=utf8mb4 comment='测试';
 insert into test (id,name) values (1,'测试');
+insert into test (id,name) values (2,'测试2');
