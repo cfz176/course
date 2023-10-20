@@ -1,9 +1,9 @@
-package system.service;
+package com.course.server.service;
 
+import com.course.server.mapper.TestMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import system.entity.Test;
-import system.mapper.TestMapper;
+import com.course.server.entity.Test;
 
 import java.util.List;
 

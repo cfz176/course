@@ -1,7 +1,7 @@
-package system.mapper;
+package com.course.server.mapper;
 
 
-import system.entity.Test;
+import com.course.server.entity.Test;
 
 import java.util.List;
 

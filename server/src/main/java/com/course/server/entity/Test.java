@@ -1,4 +1,4 @@
-package system.entity;
+package com.course.server.entity;
 
 public class Test {
 
