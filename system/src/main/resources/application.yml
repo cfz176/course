@@ -1,11 +1,6 @@
 spring:
   application:
     name: system
-  datasource: #增加数据库连接
-    url: jdbc:mysql://127.0.0.1:3306/course?characterEncoding=utf-8&serverTimezone=UTC
-    username: courseimooc
-    password: courseimooc
-    driver-class-name: com.mysql.cj.jdbc.Driver
 server:
   port: 9001
   servlet:
@@ -15,12 +10,3 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 
-mybatis:
-  mapper-locations: /mapper/*.xml
-
-logging:
-    level:
-      com:
-        course:
-          system:
-           mapper: trace
