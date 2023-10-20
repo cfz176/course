@@ -17,3 +17,10 @@ eureka:
 
 mybatis:
   mapper-locations: /mapper/*.xml
+
+logging:
+    level:
+      com:
+        course:
+          system:
+           mapper: trace
