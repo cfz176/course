@@ -4,6 +4,8 @@ spring:
 
 server:
   port: 9001
+  servlet:
+    context-path: /system #所有路径前缀
 eureka:
   client:
     service-url:
