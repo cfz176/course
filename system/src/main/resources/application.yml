@@ -1,7 +1,11 @@
 spring:
   application:
     name: system
-
+  datasource: #增加数据库连接
+    url: jdbc:mysql://localhost:3306/courseimooc@localhost?characterEncoding=utf8&autoReconnect=true
+    username: courseimooc
+    password: courseimooc
+    driver-class-name: com.mysql.cj.jdbc.Driver
 server:
   port: 9001
   servlet:
@@ -10,3 +14,4 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+
