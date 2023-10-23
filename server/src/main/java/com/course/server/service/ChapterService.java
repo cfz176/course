@@ -4,6 +4,7 @@ import com.course.server.dto.ChapterDto;
 import com.course.server.entity.Chapter;
 import com.course.server.entity.ChapterExample;
 import com.course.server.mapper.ChapterMapper;
+import com.course.server.utils.BeanCopyUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +18,18 @@ public class ChapterService {
     @Autowired
     private ChapterMapper ChapterMapper;
 
+    //查询大章列表
     public List<ChapterDto> list() {
         ChapterExample ChapterExample = new ChapterExample();
         List<Chapter> chapterList = ChapterMapper.selectByExample(ChapterExample);
-        ArrayList<ChapterDto> chapterDtoList = new ArrayList<>();
-        for (int i = 0, l = chapterList.size(); i < l; i++){
-            Chapter chapter = chapterList.get(i);
-            ChapterDto chapterDto = new ChapterDto();
-            BeanUtils.copyProperties(chapter, chapterDto);
-            chapterDtoList.add(chapterDto);
-        }
-        return chapterDtoList;
+//        ArrayList<ChapterDto> chapterDtoList = new ArrayList<>();
+//        for (int i = 0, l = chapterList.size(); i < l; i++){
+//            Chapter chapter = chapterList.get(i);
+//            ChapterDto chapterDto = new ChapterDto();
+//            BeanUtils.copyProperties(chapter, chapterDto);
+//            chapterDtoList.add(chapterDto);
+//        }
+        List<ChapterDto> chapterDtos = BeanCopyUtils.copyBeanList(chapterList, ChapterDto.class);
+        return chapterDtos;
     }
 }
