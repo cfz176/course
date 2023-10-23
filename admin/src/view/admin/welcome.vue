@@ -6,7 +6,14 @@
 
 <script>
   export default {
-    name: "welcome"
+    name: "welcome",
+    inject: ["fatherMethod"],
+    mounted() {
+      this.fatherMethod("welcome-sidebar");
+    },
+    methods: {
+
+    }
   }
 </script>
 

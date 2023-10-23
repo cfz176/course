@@ -184,7 +184,8 @@
                   <ul class="dropdown-menu dropdown-navbar">
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar.png" class="msg-photo"
+                             alt="Alex's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Alex:</span>
@@ -201,7 +202,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar3.png" class="msg-photo"
+                             alt="Susan's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Susan:</span>
@@ -218,7 +220,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar4.png" class="msg-photo"
+                             alt="Bob's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Bob:</span>
@@ -235,7 +238,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar2.png" class="msg-photo"
+                             alt="Kate's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Kate:</span>
@@ -252,7 +256,8 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar5.png" class="msg-photo"
+                             alt="Fred's Avatar"/>
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Fred:</span>
@@ -356,7 +361,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-          <li class="">
+          <li class="" id="welcome-sidebar">
             <a href="index.html">
               <i class="menu-icon fa fa-tachometer"></i>
               <span class="menu-text"> 欢迎 </span>
@@ -365,7 +370,7 @@
             <b class="arrow"></b>
           </li>
 
-          <li class="open active">
+          <li class="">
             <a href="#" class="dropdown-toggle">
               <i class="menu-icon fa fa-list"></i>
               <span class="menu-text"> 系统管理 </span>
@@ -376,7 +381,7 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-              <li class="">
+              <li class="" id="admin-user-sidebar">
                 <a href="tables.html">
                   <i class="menu-icon fa fa-caret-right"></i>
                   用户管理
@@ -385,7 +390,7 @@
                 <b class="arrow"></b>
               </li>
 
-              <li class="">
+              <li class="" id="admin-authority-sidebar">
                 <a href="jqgrid.html">
                   <i class="menu-icon fa fa-caret-right"></i>
                   权限管理
@@ -393,6 +398,29 @@
 
                 <b class="arrow"></b>
               </li>
+            </ul>
+          </li>
+
+          <li class="open">
+            <a href="#" class="dropdown-toggle">
+              <i class="menu-icon fa fa-list"></i>
+              <span class="menu-text"> 业务管理 </span>
+
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+              <li class="active" id="business-chapter-sidebar">
+                <a href="tables.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  章节管理
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
             </ul>
           </li>
         </ul><!-- /.nav-list -->
@@ -453,13 +481,44 @@
 </template>
 
 <script>
+  import Child from "./admin/welcome"
 
   export default {
     name: "admin",
+    components: {
+      Child
+    },
+    provide() {
+      return {
+        fatherMethod: this.activeSidebar
+      }
+    },
     mounted: function () {
       $('body').removeClass('login-layout light-login')
-      $('body').attr('class','no-skin')
+      $('body').attr('class', 'no-skin')
     },
+    methods: {
+      /**
+       * 菜单激活样式，自身增加active样式
+       */
+      activeSidebar: function (id) {
+        console.log(1111)
+        //同级菜单清楚active样式，自身增加active样式
+        $('#' + id).siblings().removeClass('active');
+        $('#' + id).siblings().find('li').removeClass('active');
+        $('#' + id).addClass('active');
+
+
+        //如果有上级菜单，上级菜单的同级菜单去掉open,active,上级菜单添加open active
+        let parentLi = $('#', +id).parents('li');
+        if (parentLi) {
+          parentLi.siblings().removeClass('open active');
+          parentLi.siblings().find('li').removeClass('active');
+          parentLi.addClass('open active');
+        }
+      }
+
+    }
   }
 </script>
 
