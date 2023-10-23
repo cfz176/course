@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import Login from './view/login'
 import Admin from './view/admin'
 import Welcome from './view/admin/welcome'
+import Chapter from './view/admin/chapter'
 
 const routes = [
   {
@@ -16,6 +17,9 @@ const routes = [
     children: [{
       path: 'welcome',
       component: Welcome,
+    },{
+      path: 'chapter',
+      component: Chapter,
     }]
   }
 ];
