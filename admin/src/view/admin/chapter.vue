@@ -178,7 +178,7 @@
     methods: {
       list() {
         let _this = this;
-        _this.$ajax.get("http://localhost:9002/business/admin/chapter/list").then((respond) => {
+        _this.$ajax.get("http://localhost:9000/business/admin/chapter/list").then((respond) => {
           _this.chapters = respond.data;
           console.log(respond)
         })

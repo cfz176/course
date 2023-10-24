@@ -502,9 +502,7 @@
     watch: {
       $route: {
         handler: function (val, oldValue) {
-          console.log("---->页面你跳转：", val, oldValue);
           let _this = this;
-          console.log(_this.$route.name.replace("/","-") + "-sidebar");
           _this.$nextTick(function(){
             _this.activeSidebar(_this.$route.name.replace("/","-") + "-sidebar")
           })
