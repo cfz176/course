@@ -401,7 +401,7 @@
             </ul>
           </li>
 
-          <li class="open">
+          <li class="">
             <a href="#" class="dropdown-toggle">
               <i class="menu-icon fa fa-list"></i>
               <span class="menu-text"> 业务管理 </span>
@@ -494,15 +494,28 @@
       }
     },
     mounted: function () {
+      let _this = this;
       $('body').removeClass('login-layout light-login')
       $('body').attr('class', 'no-skin')
+      _this.activeSidebar(_this.$route.name.replace("/","-") + "-sidebar")
+    },
+    watch: {
+      $route: {
+        handler: function (val, oldValue) {
+          console.log("---->页面你跳转：", val, oldValue);
+          let _this = this;
+          console.log(_this.$route.name.replace("/","-") + "-sidebar");
+          _this.$nextTick(function(){
+            _this.activeSidebar(_this.$route.name.replace("/","-") + "-sidebar")
+          })
+        }
+      }
     },
     methods: {
       /**
        * 菜单激活样式，自身增加active样式
        */
       activeSidebar: function (id) {
-        console.log(1111)
         //同级菜单清楚active样式，自身增加active样式
         $('#' + id).siblings().removeClass('active');
         $('#' + id).siblings().find('li').removeClass('active');
@@ -510,11 +523,11 @@
 
 
         //如果有上级菜单，上级菜单的同级菜单去掉open,active,上级菜单添加open active
-        let parentLi = $('#', +id).parents('li');
+        let parentLi = $("#" + id).parents("li");
         if (parentLi) {
-          parentLi.siblings().removeClass('open active');
-          parentLi.siblings().find('li').removeClass('active');
-          parentLi.addClass('open active');
+          parentLi.siblings().removeClass("open active");
+          parentLi.siblings().find("li").removeClass("active");
+          parentLi.addClass("open active");
         }
       }
 

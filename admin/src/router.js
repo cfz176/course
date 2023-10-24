@@ -16,9 +16,11 @@ const routes = [
     component: Admin,
     children: [{
       path: 'welcome',
+      name: 'welcome',
       component: Welcome,
     },{
       path: 'business/chapter',
+      name: 'business/chapter',
       component: Chapter,
     }]
   }

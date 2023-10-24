@@ -7,9 +7,9 @@
 <script>
   export default {
     name: "welcome",
-    inject: ["fatherMethod"],
+    // inject: ["fatherMethod"],
     mounted() {
-      this.fatherMethod("welcome-sidebar");
+      // this.fatherMethod("welcome-sidebar");
     },
     methods: {
 
