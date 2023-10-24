@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/business/admin/chapter")
 public class ChapterController {
 
     @Autowired
     private ChapterService ChapterService;
 
-    @RequestMapping("/chapter")
+    @RequestMapping("/list")
     public List<ChapterDto> Chapter() {
         return ChapterService.list();
     }
