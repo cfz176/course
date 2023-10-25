@@ -5,10 +5,14 @@
         <i class="ace-icon fa fa-refresh bigger-120 blue"></i>
         刷新
       </button>
+      &nbsp;
+      <button v-on:click="add()" class="btn btn-white btn-info  btn-round">
+        <i class="ace-icon fa fa-edit bigger-120 blue"></i>
+        新增
+      </button>
     </p>
-    <p>
-      <Pagination ref="pagination" v-bind:list="list"></Pagination>
-    </p>
+
+    <!--章节列表-->
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
       <tr>
@@ -96,6 +100,42 @@
       </tr>
       </tbody>
     </table>
+    <!--分页插件-->
+    <p>
+      <Pagination ref="pagination" v-bind:list="list"></Pagination>
+    </p>
+
+    <!--新增模态框-->
+    <div class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">添加章节</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">添加</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </div><!-- /.span -->
 </template>
 
@@ -115,6 +155,9 @@
       _this.list(1);
     },
     methods: {
+      add() {
+        $(".modal").modal("show")
+      },
       list(page) {
         let _this = this;
         _this.$ajax.post("http://localhost:9000/business/admin/chapter/list", {
