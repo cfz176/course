@@ -110,28 +110,29 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">添加章节</h4>
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <label class="col-sm-2 control-label">课程</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  <input v-model="chapter.name" class="form-control" placeholder="请输入课程">
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <label class="col-sm-2 control-label">课程编号</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                  <input v-model="chapter.courseId" class="form-control" placeholder="请输入课程编号">
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">添加</button>
+            <button v-on:click="save()" type="button" class="btn btn-primary">添加</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -147,6 +148,7 @@
     components: {Pagination},
     data: function () {
       return {
+        chapter: {},
         chapters: []
       }
     },
@@ -155,6 +157,13 @@
       _this.list(1);
     },
     methods: {
+      save() {
+        let _this = this;
+        _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter)
+          .then((respond) => {
+            console.log("保存章节结果{}", respond);
+          })
+      },
       add() {
         $(".modal").modal("show")
       },
@@ -166,7 +175,7 @@
         }).then((respond) => {
           console.log(respond)
           _this.chapters = respond.data.list;
-          _this.$refs.pagination.render(page,respond.data.total);
+          _this.$refs.pagination.render(page, respond.data.total);
         })
       }
     }
