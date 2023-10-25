@@ -179,7 +179,7 @@
       list() {
         let _this = this;
         _this.$ajax.get("http://localhost:9000/business/admin/chapter/list").then((respond) => {
-          _this.chapters = respond.data;
+          _this.chapters = respond.data.list;
           console.log(respond)
         })
       }
