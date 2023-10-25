@@ -100,13 +100,14 @@
       </tr>
       </tbody>
     </table>
+
     <!--分页插件-->
     <p>
       <Pagination ref="pagination" v-bind:list="list"></Pagination>
     </p>
 
     <!--新增模态框-->
-    <div class="modal fade" tabindex="-1" role="dialog">
+    <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -161,11 +162,16 @@
         let _this = this;
         _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter)
           .then((respond) => {
-            console.log("保存章节结果{}", respond);
+            let resp = respond.data;
+            console.log("保存章节结果{}", resp);
+            if (resp.success) {
+              _this.list(1);
+              $("#form-modal").modal("hide")
+            }
           })
       },
       add() {
-        $(".modal").modal("show")
+        $("#form-modal").modal("show")
       },
       list(page) {
         let _this = this;
@@ -174,8 +180,9 @@
           size: _this.$refs.pagination.size
         }).then((respond) => {
           console.log(respond)
-          _this.chapters = respond.data.list;
-          _this.$refs.pagination.render(page, respond.data.total);
+          let resp = respond.data;
+          _this.chapters = resp.content.list;
+          _this.$refs.pagination.render(page, resp.content.total);
         })
       }
     }
