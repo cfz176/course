@@ -4,6 +4,7 @@ import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @RequestMapping("/list")
-    public PageDto Chapter(PageDto pageDto) {
+    public PageDto Chapter(@RequestBody PageDto pageDto) {
         chapterService.list(pageDto);
         return pageDto;
     }

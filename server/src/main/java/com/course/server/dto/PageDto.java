@@ -17,7 +17,7 @@ public class PageDto<V> {
     /**
      * 总条数
      */
-    protected long tatol;
+    protected long total;
 
 
     protected List<V> list;
@@ -38,12 +38,12 @@ public class PageDto<V> {
         this.size = size;
     }
 
-    public long getTatol() {
-        return tatol;
+    public long getTotal() {
+        return total;
     }
 
-    public void setTatol(long tatol) {
-        this.tatol = tatol;
+    public void setTotal(long total) {
+        this.total = total;
     }
 
     public List<V> getList() {

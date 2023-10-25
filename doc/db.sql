@@ -5,8 +5,11 @@ create table `chapter`(
  `name` char(60) comment '名称',
  primary key (`id`)
 )engine=innodb default charset=utf8mb4 comment='大章';
-insert into `chapter`(`id`,`course_id`,`name`) values('0001','9999','课程1');
-insert into `chapter`(`id`,`course_id`,`name`) values('0002','8888','课程2');
+insert into `chapter`(`id`,`course_id`,`name`) values('0001','8888','课程01');
+insert into `chapter`(`id`,`course_id`,`name`) values('0002','8888','课程02');
+insert into `chapter`(`id`,`course_id`,`name`) values('0003','8888','课程03');
+insert into `chapter`(`id`,`course_id`,`name`) values('0004','8888','课程04');
+insert into `chapter`(`id`,`course_id`,`name`) values('0005','8888','课程05');
 
 #---------------------------------- 测试
 drop table if exists `test`;

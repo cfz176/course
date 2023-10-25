@@ -8,11 +8,9 @@ import com.course.server.mapper.ChapterMapper;
 import com.course.server.utils.BeanCopyUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,7 +29,7 @@ public class ChapterService {
         //获取分页数据
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapterList);
         //添加总条数到pageDto
-        pageDto.setTatol(pageInfo.getTotal());
+        pageDto.setTotal(pageInfo.getTotal());
 //        ArrayList<ChapterDto> chapterDtoList = new ArrayList<>();
 //        for (int i = 0, l = chapterList.size(); i < l; i++){
 //            Chapter chapter = chapterList.get(i);
