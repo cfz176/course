@@ -145,11 +145,31 @@
     },
     methods: {
       del(id) {
-        let _this = this;
-        _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
-          console.log("删除结果：{}", respond);
-          this.list(_this.$refs.pagination.page)
-        });
+        Swal.fire({
+          title: '确认删除?',
+          text: "你将删除该章节!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '确认',
+          cancelButtonText: '取消'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let _this = this;
+            _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
+              let resp = respond.data;
+              console.log("删除结果：{}", respond);
+              if (resp.success) {
+                this.list(_this.$refs.pagination.page);
+                toast.success("删除成功");
+              } else {
+                toast.error("删除失败");
+              }
+            });
+          }
+        })
+
       },
       edit(chapter) {
         let _this = this;
@@ -163,8 +183,11 @@
             let resp = respond.data;
             console.log("保存章节结果{}", resp);
             if (resp.success) {
-              this.list(_this.$refs.pagination.page)
-              $("#form-modal").modal("hide")
+              this.list(_this.$refs.pagination.page);
+              toast.success("保存成功");
+              $("#form-modal").modal("hide");
+            } else {
+              toast.error("保存失败");
             }
           })
       },

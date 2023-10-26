@@ -26,7 +26,7 @@ public class ChapterController {
      * @param pageDto
      * @return
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
     public ResponseDto<PageDto> chapter(@RequestBody PageDto pageDto) {
         //查询章节列表
         chapterService.list(pageDto);
