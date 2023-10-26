@@ -146,31 +146,34 @@
     methods: {
       del(id) {
         let _this = this;
-        Swal.fire({
-          title: '确认删除?',
-          text: "你将删除该章节!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '确认',
-          cancelButtonText: '取消'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Loading.show();
-            _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
-              let resp = respond.data;
-              console.log("删除结果：{}", respond);
-              if (resp.success) {
-                this.list(_this.$refs.pagination.page);
-                Loading.hide();
-                toast.success("删除成功");
-              } else {
-                toast.error("删除失败");
-              }
-            });
-          }
+        Confirm.show("删除","删除章节将不可恢复",function () {
+          Loading.show();
+          _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
+            let resp = respond.data;
+            console.log("删除结果：{}", respond);
+            if (resp.success) {
+              _this.list(_this.$refs.pagination.page);
+              Loading.hide();
+              toast.success("删除成功");
+            } else {
+              toast.error("删除失败");
+            }
+          });
         })
+        // Swal.fire({
+        //   title: '确认删除?',
+        //   text: "你将删除该章节!",
+        //   icon: 'warning',
+        //   showCancelButton: true,
+        //   confirmButtonColor: '#3085d6',
+        //   cancelButtonColor: '#d33',
+        //   confirmButtonText: '确认',
+        //   cancelButtonText: '取消'
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+        //
+        //   }
+        // })
 
       },
       edit(chapter) {
