@@ -2,6 +2,7 @@ package com.course.server.service;
 
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
+import com.course.server.dto.ResponseDto;
 import com.course.server.entity.Chapter;
 import com.course.server.entity.ChapterExample;
 import com.course.server.mapper.ChapterMapper;
@@ -11,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -39,20 +41,56 @@ public class ChapterService {
 //            chapterDtoList.add(chapterDto);
 //        }
         //添加数据到pageDto
-        List<ChapterDto> chapterDtoList  = BeanCopyUtils.copyBeanList(chapterList, ChapterDto.class);
+        List<ChapterDto> chapterDtoList = BeanCopyUtils.copyBeanList(chapterList, ChapterDto.class);
         pageDto.setList(chapterDtoList);
     }
 
     /**
-     * 新增章节
      * @param chapterDto
      */
     public void save(ChapterDto chapterDto) {
-        //生成章节id
-        chapterDto.setId(UuidUtil.getShortUuid());
         //dto转换实体
         Chapter chapter = BeanCopyUtils.copyBean(chapterDto, Chapter.class);
+        //判断id字段是否为空
+        if (ObjectUtils.isEmpty(chapterDto.getId())) {
+            //为空 则新增
+            insert(chapter);
+        } else if (!ObjectUtils.isEmpty(chapterDto.getId())) {
+            //不为空 修改
+            update(chapter);
+        }
+    }
+
+    /**
+     * 新增章节
+     *
+     * @param chapter
+     */
+    private void insert(Chapter chapter) {
+        //生成章节id
+        chapter.setId(UuidUtil.getShortUuid());
         //新增章节
         chapterMapper.insert(chapter);
+    }
+
+    /**
+     * 修改章节
+     *
+     * @param chapter
+     */
+    private void update(Chapter chapter) {
+        chapterMapper.updateByPrimaryKey(chapter);
+    }
+
+    /**
+     * 删除章节
+     * @param id
+     */
+    public ResponseDto delete(String id) {
+        int result = chapterMapper.deleteByPrimaryKey(id);
+        if (result == 1) {
+            return ResponseDto.successResult();
+        }
+        return ResponseDto.errorResult();
     }
 }

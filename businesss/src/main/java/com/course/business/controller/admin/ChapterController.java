@@ -6,10 +6,7 @@ import com.course.server.dto.ResponseDto;
 import com.course.server.entity.Chapter;
 import com.course.server.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,10 +22,11 @@ public class ChapterController {
 
     /**
      * 查询章节列表
+     *
      * @param pageDto
      * @return
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public ResponseDto<PageDto> chapter(@RequestBody PageDto pageDto) {
         //查询章节列表
         chapterService.list(pageDto);
@@ -39,11 +37,12 @@ public class ChapterController {
     }
 
     /**
-     * 新增章节
+     * 保存章节
+     *
      * @param chapterDto
      * @return
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public ResponseDto<ChapterDto> saveChapter(@RequestBody ChapterDto chapterDto) {
         //新增章节
         chapterService.save(chapterDto);
@@ -51,6 +50,16 @@ public class ChapterController {
         ResponseDto<ChapterDto> responseDto = new ResponseDto<>();
         responseDto.setContent(chapterDto);
         return responseDto;
+    }
+
+    /**
+     * 删除章节
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseDto<ChapterDto> deleteChapter(@PathVariable("id") String id) {
+        return chapterService.delete(id);
     }
 
 }

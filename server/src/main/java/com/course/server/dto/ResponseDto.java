@@ -22,6 +22,23 @@ public class ResponseDto<T> {
      */
     private T content;
 
+    public static<V> ResponseDto errorResult() {
+        ResponseDto<V> responseDto = new ResponseDto<>();
+        responseDto.setSuccess(false);
+        return responseDto;
+    }
+
+    public static<V> ResponseDto successResult() {
+        ResponseDto<V> responseDto = new ResponseDto<>();
+        return responseDto;
+    }
+
+    public static ResponseDto successResult(Object data) {
+        ResponseDto responseDto = new ResponseDto<>();
+        responseDto.setContent(data);
+        return responseDto;
+    }
+
     public String getCode() {
         return code;
     }
