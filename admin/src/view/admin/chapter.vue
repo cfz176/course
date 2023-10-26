@@ -145,6 +145,7 @@
     },
     methods: {
       del(id) {
+        let _this = this;
         Swal.fire({
           title: '确认删除?',
           text: "你将删除该章节!",
@@ -156,12 +157,13 @@
           cancelButtonText: '取消'
         }).then((result) => {
           if (result.isConfirmed) {
-            let _this = this;
+            Loading.show();
             _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
               let resp = respond.data;
               console.log("删除结果：{}", respond);
               if (resp.success) {
                 this.list(_this.$refs.pagination.page);
+                Loading.hide();
                 toast.success("删除成功");
               } else {
                 toast.error("删除失败");
@@ -178,14 +180,16 @@
       },
       save() {
         let _this = this;
+        Loading.show();
         _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter)
           .then((respond) => {
             let resp = respond.data;
             console.log("保存章节结果{}", resp);
             if (resp.success) {
               this.list(_this.$refs.pagination.page);
-              toast.success("保存成功");
+              Loading.hide();
               $("#form-modal").modal("hide");
+              toast.success("保存成功");
             } else {
               toast.error("保存失败");
             }
