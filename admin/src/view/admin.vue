@@ -481,13 +481,13 @@
 </template>
 
 <script>
-  import Child from "./admin/welcome"
+  // import Child from "./admin/welcome"
 
   export default {
     name: "admin",
-    components: {
-      Child
-    },
+    // components: {
+    //   Child
+    // },
     provide() {
       return {
         fatherMethod: this.activeSidebar

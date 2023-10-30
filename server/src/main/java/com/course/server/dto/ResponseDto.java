@@ -24,6 +24,14 @@ public class ResponseDto<T> {
 
     public static<V> ResponseDto errorResult() {
         ResponseDto<V> responseDto = new ResponseDto<>();
+        responseDto.setMessage("失败");
+        responseDto.setSuccess(false);
+        return responseDto;
+    }
+
+    public static ResponseDto errorResult(String msg) {
+        ResponseDto responseDto = new ResponseDto<>();
+        responseDto.setMessage(msg);
         responseDto.setSuccess(false);
         return responseDto;
     }
@@ -33,8 +41,8 @@ public class ResponseDto<T> {
         return responseDto;
     }
 
-    public static ResponseDto successResult(Object data) {
-        ResponseDto responseDto = new ResponseDto<>();
+    public static<V> ResponseDto<V> successResult(V data) {
+        ResponseDto<V> responseDto = new ResponseDto<>();
         responseDto.setContent(data);
         return responseDto;
     }

@@ -1,14 +1,11 @@
-
-
-
-toast = {
+Toast = {
   success: function (msg) {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
       title: msg,
       showConfirmButton: false,
-      timer: 900
+      timer: 1000
     })
   },
   error: function (msg) {
@@ -17,7 +14,7 @@ toast = {
       icon: 'error',
       title: msg,
       showConfirmButton: false,
-      timer: 900
+      timer: 1000
     })
   },
   warning: function (msg) {
@@ -26,7 +23,7 @@ toast = {
       icon: 'warning',
       title: msg,
       showConfirmButton: false,
-      timer: 900
+      timer: 1000
     })
   }
 }

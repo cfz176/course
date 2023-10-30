@@ -3,12 +3,10 @@ package com.course.business.controller.admin;
 import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
-import com.course.server.entity.Chapter;
 import com.course.server.service.ChapterService;
+import com.course.server.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 章节
@@ -44,6 +42,12 @@ public class ChapterController {
      */
     @PostMapping("/save")
     public ResponseDto<ChapterDto> saveChapter(@RequestBody ChapterDto chapterDto) {
+        //判断课程名是否为空
+        ValidatorUtil.require(chapterDto.getName(),"课程名");
+        //判断课程号是否为空
+        ValidatorUtil.require(chapterDto.getCourseId(),"课程编号");
+        //判断课程号长度是否合法
+        ValidatorUtil.length(chapterDto.getCourseId(),"课程编号",4,8);
         //新增章节
         chapterService.save(chapterDto);
         //设置返回值

@@ -24,7 +24,7 @@
         </th>
         <th class="detail-col">ID</th>
         <th>课程编号</th>
-        <th>章节</th>
+        <th>课程名</th>
         <th>操作</th>
       </tr>
       </thead>
@@ -99,12 +99,12 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
               aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">添加章节</h4>
+            <h4 class="modal-title">添加课程</h4>
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
-                <label class="col-sm-2 control-label">课程</label>
+                <label class="col-sm-2 control-label">课程名</label>
                 <div class="col-sm-10">
                   <input v-model="chapter.name" class="form-control" placeholder="请输入课程">
                 </div>
@@ -146,7 +146,7 @@
     methods: {
       del(id) {
         let _this = this;
-        Confirm.show("删除","删除章节将不可恢复",function () {
+        Confirm.show("删除", "删除章节将不可恢复", function () {
           Loading.show();
           _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
             let resp = respond.data;
@@ -154,9 +154,9 @@
             if (resp.success) {
               _this.list(_this.$refs.pagination.page);
               Loading.hide();
-              toast.success("删除成功");
+              Toast.success("删除成功");
             } else {
-              toast.error("删除失败");
+              Toast.error("删除失败");
             }
           });
         })
@@ -183,6 +183,12 @@
       },
       save() {
         let _this = this;
+        // if (!Validator.require(_this.chapter.name, "课程名")
+        //   || !Validator.require(_this.chapter.courseId, "课程号")
+        //   || !Validator.length(_this.chapter.courseId, "课程号", 4, 8)) {
+        //   return
+        // }
+        //加载框显示
         Loading.show();
         _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter)
           .then((respond) => {
@@ -190,12 +196,13 @@
             console.log("保存章节结果{}", resp);
             if (resp.success) {
               this.list(_this.$refs.pagination.page);
-              Loading.hide();
               $("#form-modal").modal("hide");
-              toast.success("保存成功");
+              Toast.success("保存成功");
             } else {
-              toast.error("保存失败");
+              Toast.error(resp.message);
             }
+            //加载框关闭
+            Loading.hide();
           })
       },
       add() {
