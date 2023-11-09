@@ -144,13 +144,13 @@
       _this.list(1);
     },
     methods: {
+      /*点击删除*/
       del(id) {
         let _this = this;
         Confirm.show("删除", "删除章节将不可恢复", function () {
           Loading.show();
           _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
             let resp = respond.data;
-            console.log("删除结果：{}", respond);
             if (resp.success) {
               _this.list(_this.$refs.pagination.page);
               Loading.hide();
@@ -160,40 +160,27 @@
             }
           });
         })
-        // Swal.fire({
-        //   title: '确认删除?',
-        //   text: "你将删除该章节!",
-        //   icon: 'warning',
-        //   showCancelButton: true,
-        //   confirmButtonColor: '#3085d6',
-        //   cancelButtonColor: '#d33',
-        //   confirmButtonText: '确认',
-        //   cancelButtonText: '取消'
-        // }).then((result) => {
-        //   if (result.isConfirmed) {
-        //
-        //   }
-        // })
 
       },
+      /*点击弹出修改框*/
       edit(chapter) {
         let _this = this;
         _this.chapter = $.extend({}, chapter);
         $("#form-modal").modal("show")
       },
+      /*点击保存*/
       save() {
         let _this = this;
-        // if (!Validator.require(_this.chapter.name, "课程名")
-        //   || !Validator.require(_this.chapter.courseId, "课程号")
-        //   || !Validator.length(_this.chapter.courseId, "课程号", 4, 8)) {
-        //   return
-        // }
+        if (!Validator.require(_this.chapter.name, "课程名")
+          || !Validator.require(_this.chapter.courseId, "课程号")
+          || !Validator.length(_this.chapter.courseId, "课程号", 4, 8)) {
+          return
+        }
         //加载框显示
         Loading.show();
         _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter)
           .then((respond) => {
             let resp = respond.data;
-            console.log("保存章节结果{}", resp);
             if (resp.success) {
               this.list(_this.$refs.pagination.page);
               $("#form-modal").modal("hide");
@@ -205,18 +192,19 @@
             Loading.hide();
           })
       },
+      /*点击弹出新增框*/
       add() {
         let _this = this;
         _this.chapter = {};
         $("#form-modal").modal("show")
       },
+      /*查询章节列表*/
       list(page) {
         let _this = this;
         _this.$ajax.post("http://localhost:9000/business/admin/chapter/list", {
           page: page,
           size: _this.$refs.pagination.size
         }).then((respond) => {
-          console.log(respond)
           let resp = respond.data;
           _this.chapters = resp.content.list;
           _this.$refs.pagination.render(page, resp.content.total);
