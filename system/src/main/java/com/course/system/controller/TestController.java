@@ -1,5 +1,6 @@
 package com.course.system.controller;
 
+import com.course.server.dto.ChapterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,8 @@ public class TestController {
 
     @RequestMapping("/test")
     public List<Test> test() {
+        ChapterDto chapterDto = new ChapterDto();
+        chapterDto.setId("123");
         return testService.list();
     }
 
