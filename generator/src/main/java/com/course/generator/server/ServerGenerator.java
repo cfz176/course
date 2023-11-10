@@ -4,13 +4,20 @@ import com.course.generator.util.FreeMarkerUtil;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class ServerGenerator {
 
-    static String toPath = "generator\\src\\main\\java\\com\\course\\generator\\ftl\\";
+    static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
 
     public static void main(String[] args) throws IOException, TemplateException {
-        FreeMarkerUtil.initConfig("test.ftl");
-        FreeMarkerUtil.generator(toPath + "Test.java");
+        String Domain = "Section";
+        String domain = "section";
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("Domain", Domain);
+        map.put("domain", domain);
+
+        FreeMarkerUtil.initConfig("service.ftl");
+        FreeMarkerUtil.generator(toServicePath + Domain + "Service.java", map);
     }
 }
