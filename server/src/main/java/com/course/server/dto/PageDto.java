@@ -19,7 +19,6 @@ public class PageDto<V> {
      */
     protected long total;
 
-
     protected List<V> list;
 
     public int getPage() {

@@ -46,7 +46,6 @@ public class SectionController {
      */
     @PostMapping("/save")
     public ResponseDto<SectionDto> saveSection(@RequestBody SectionDto sectionDto) {
-
         //新增章节
         sectionService.save(sectionDto);
         //设置返回值
