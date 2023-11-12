@@ -19,4 +19,6 @@ app.config.globalProperties.$ajax = axios;
 app.use(router)
 app.mount("#app");
 
+console.log(process.env.VUE_APP_SERVER)
+
 

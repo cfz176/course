@@ -149,7 +149,7 @@
         let _this = this;
         Confirm.show("删除", "删除章节将不可恢复", function () {
           Loading.show();
-          _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((respond) => {
+          _this.$ajax.delete(process.env.VUE_APP_SERVER + "/business/admin/chapter/delete/" + id).then((respond) => {
             let resp = respond.data;
             if (resp.success) {
               _this.list(_this.$refs.pagination.page);
@@ -178,7 +178,7 @@
         }
         //加载框显示
         Loading.show();
-        _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter)
+        _this.$ajax.post(process.env.VUE_APP_SERVER + "/business/admin/chapter/save", _this.chapter)
           .then((respond) => {
             let resp = respond.data;
             if (resp.success) {
@@ -201,7 +201,7 @@
       /*查询章节列表*/
       list(page) {
         let _this = this;
-        _this.$ajax.post("http://localhost:9000/business/admin/chapter/list", {
+        _this.$ajax.post(process.env.VUE_APP_SERVER + "/business/admin/chapter/list", {
           page: page,
           size: _this.$refs.pagination.size
         }).then((respond) => {
