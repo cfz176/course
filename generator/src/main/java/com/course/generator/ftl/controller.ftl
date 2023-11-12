@@ -46,12 +46,6 @@ public class ${Domain}Controller {
      */
     @PostMapping("/save")
     public ResponseDto<${Domain}Dto> save${Domain}(@RequestBody ${Domain}Dto ${domain}Dto) {
-        //判断课程名是否为空
-        ValidatorUtil.require(${domain}Dto.getName(),"课程名");
-        //判断课程号是否为空
-        ValidatorUtil.require(${domain}Dto.getCourseId(),"课程编号");
-        //判断课程号长度是否合法
-        ValidatorUtil.length(${domain}Dto.getCourseId(),"课程编号",4,8);
         //新增章节
         ${domain}Service.save(${domain}Dto);
         //设置返回值
