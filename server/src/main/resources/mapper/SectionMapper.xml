@@ -106,12 +106,12 @@
   </delete>
   <insert id="insert" parameterType="com.course.server.entity.Section">
     insert into section (id, title, course_id, 
-      chapter_id, video, `time`, 
+      chapter_id, video, `time`,
       charge, sort, created_at, 
       updated_at)
-    values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{courseId,jdbcType=CHAR}, 
-      #{chapterId,jdbcType=CHAR}, #{video,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, 
-      #{charge,jdbcType=CHAR}, #{sort,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{courseId,jdbcType=CHAR},
+      #{chapterId,jdbcType=CHAR}, #{video,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER},
+      #{charge,jdbcType=CHAR}, #{sort,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.course.server.entity.Section">

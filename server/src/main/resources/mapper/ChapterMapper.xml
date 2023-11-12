@@ -82,7 +82,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from chapter
     where id = #{id,jdbcType=CHAR}
@@ -152,8 +152,8 @@
   <update id="updateByExample" parameterType="map">
     update chapter
     set id = #{record.id,jdbcType=CHAR},
-      course_id = #{record.courseId,jdbcType=CHAR},
-      `name` = #{record.name,jdbcType=CHAR}
+    course_id = #{record.courseId,jdbcType=CHAR},
+    `name` = #{record.name,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -173,7 +173,7 @@
   <update id="updateByPrimaryKey" parameterType="com.course.server.entity.Chapter">
     update chapter
     set course_id = #{courseId,jdbcType=CHAR},
-      `name` = #{name,jdbcType=CHAR}
+        `name` = #{name,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

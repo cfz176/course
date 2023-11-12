@@ -3,6 +3,7 @@ import Login from './view/login'
 import Admin from './view/admin'
 import Welcome from './view/admin/welcome'
 import Chapter from './view/admin/chapter'
+import Section from './view/admin/section'
 
 const routes = [
   {
@@ -22,6 +23,10 @@ const routes = [
       path: 'business/chapter',
       name: 'business/chapter',
       component: Chapter,
+    },{
+      path: 'business/section',
+      name: 'business/section',
+      component: Section,
     }]
   }
 ];

@@ -420,7 +420,14 @@
 
                 <b class="arrow"></b>
               </li>
+              <li class="active" id="business-section-sidebar">
+                <router-link to="/business/section">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  小节管理
+                </router-link>
 
+                <b class="arrow"></b>
+              </li>
             </ul>
           </li>
         </ul><!-- /.nav-list -->
@@ -497,14 +504,14 @@
       let _this = this;
       $('body').removeClass('login-layout light-login')
       $('body').attr('class', 'no-skin')
-      _this.activeSidebar(_this.$route.name.replace("/","-") + "-sidebar")
+      _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar")
     },
     watch: {
       $route: {
         handler: function (val, oldValue) {
           let _this = this;
-          _this.$nextTick(function(){
-            _this.activeSidebar(_this.$route.name.replace("/","-") + "-sidebar")
+          _this.$nextTick(function () {
+            _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar")
           })
         }
       }
