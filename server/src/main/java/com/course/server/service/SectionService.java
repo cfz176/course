@@ -27,8 +27,8 @@ public class SectionService {
         //开启分页
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         //查询section列表
-        SectionExample SectionExample = new SectionExample();
-        List<Section> sectionList = sectionMapper.selectByExample(SectionExample);
+        SectionExample sectionExample = new SectionExample();
+        List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
         //获取分页数据
         PageInfo<Section> pageInfo = new PageInfo<>(sectionList);
         //添加总条数到pageDto
@@ -69,6 +69,7 @@ public class SectionService {
     private void insert(Section section) {
         //生成章节id
         section.setId(UuidUtil.getShortUuid());
+
         //新增章节
         sectionMapper.insert(section);
     }

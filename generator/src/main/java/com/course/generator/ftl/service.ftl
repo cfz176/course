@@ -26,8 +26,13 @@ public class ${Domain}Service {
     public void list(PageDto pageDto) {
         //开启分页
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
-        //查询${domain}列表
-        ${Domain}Example ${Domain}Example = new ${Domain}Example();
+        //查询${nameCn}列表
+        ${Domain}Example ${domain}Example = new ${Domain}Example();
+        <#list fieldList as field>
+            <#if field.nameHump == "sort">
+        ${domain}Example.setOrderByClause("sort ace");
+            </#if>
+        </#list>
         List<${Domain}> ${domain}List = ${domain}Mapper.selectByExample(${Domain}Example);
         //获取分页数据
         PageInfo<${Domain}> pageInfo = new PageInfo<>(${domain}List);
@@ -67,6 +72,14 @@ public class ${Domain}Service {
     * @param ${domain}
     */
     private void insert(${Domain} ${domain}) {
+        <#list fieldList as field>
+            <#if field.nameHump == "createdAt">
+        ${domain}.setCreatedAt(now)
+            </#if>
+            <#if field.nameHump == "updatedAt">
+        ${domain}.setUpdatedAt(now)
+            </#if>
+        </#list>
         //生成章节id
         ${domain}.setId(UuidUtil.getShortUuid());
         //新增章节
@@ -79,6 +92,11 @@ public class ${Domain}Service {
     * @param ${domain}
     */
     private void update(${Domain} ${domain}) {
+        <#list fieldList as field>
+            <#if field.nameHump == "updatedAt">
+         ${domain}.setUpdatedAt(now)
+            </#if>
+        </#list>
         ${domain}Mapper.updateByPrimaryKey(${domain});
     }
 
