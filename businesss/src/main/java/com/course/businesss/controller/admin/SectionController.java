@@ -39,13 +39,19 @@ public class SectionController {
     }
 
     /**
-     * 保存章节
+     * 保存章节 有ID为修改 无ID为新增
      *
      * @param sectionDto
      * @return
      */
     @PostMapping("/save")
     public ResponseDto<SectionDto> saveSection(@RequestBody SectionDto sectionDto) {
+        //判断标题是否为空
+        ValidatorUtil.require(sectionDto.getTitle(),"标题");
+        //判断标题长度是否合法
+        ValidatorUtil.length(sectionDto.getTitle(),"标题",1,50);
+        //判断视频长度是否合法
+        ValidatorUtil.length(sectionDto.getVideo(),"视频",1,200);
         //新增章节
         sectionService.save(sectionDto);
         //设置返回值

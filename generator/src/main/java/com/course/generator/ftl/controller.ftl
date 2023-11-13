@@ -39,13 +39,23 @@ public class ${Domain}Controller {
     }
 
     /**
-     * 保存章节
+     * 保存章节 有ID为修改 无ID为新增
      *
      * @param ${domain}Dto
      * @return
      */
     @PostMapping("/save")
     public ResponseDto<${Domain}Dto> save${Domain}(@RequestBody ${Domain}Dto ${domain}Dto) {
+        <#list fieldList as field>
+        <#if !field.nullAble>
+        //判断${field.nameCn}是否为空
+        ValidatorUtil.require(${domain}Dto.get${field.nameBigHump}(),"${field.nameCn}");
+        </#if>
+        <#if (field.length > 0)>
+        //判断${field.nameCn}长度是否合法
+        ValidatorUtil.length(${domain}Dto.get${field.nameBigHump}(),"${field.nameCn}",1,${field.length});
+        </#if>
+        </#list>
         //新增章节
         ${domain}Service.save(${domain}Dto);
         //设置返回值

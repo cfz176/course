@@ -20,6 +20,9 @@ Validator = {
    * 长度校验
    */
   length: function (value,text,min,max) {
+    if (Tool.isEmpty(value)) {
+      return true;
+    }
     if (!Tool.isLength(value, min, max)) {
       Toast.warning(text + "长度为" +min+ "~"+ max + "位");
       return false;

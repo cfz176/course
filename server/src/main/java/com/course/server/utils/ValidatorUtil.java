@@ -10,7 +10,7 @@ public class ValidatorUtil {
      */
     public static void require(Object value, String fieldName) {
         if (StringUtils.isEmpty(value)) {
-            throw new ValidatorException(fieldName + "不能为空");
+            throw new ValidatorException("数据异常");
         }
     }
 
@@ -18,12 +18,15 @@ public class ValidatorUtil {
      * 长度校验
      */
     public static void length(String str, String fieldName, int min, int max) {
+        if (StringUtils.isEmpty(str)) {
+            return;
+        }
         int length = 0;
         if (!StringUtils.isEmpty(str)) {
             length = str.length();
         }
         if (length < min || length > max) {
-            throw new ValidatorException(fieldName + "长度" + min + "~" + max + "位");
+            throw new ValidatorException("数据异常");
         }
     }
 }
