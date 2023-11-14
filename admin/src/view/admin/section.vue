@@ -50,7 +50,7 @@
         <td class="center">{{section.chapterId}}</td>
         <td class="center">{{section.video}}</td>
         <td class="center">{{section.time}}</td>
-        <td class="center">{{$filters.optionFilter(CHARGE,section.charge)}}</td>
+        <td class="center">{{$filters.optionObjectFilter(SECTION_CHARGE,section.charge)}}</td>
         <td class="center">{{section.sort}}</td>
         <td>
           <div class="hidden-sm hidden-xs btn-group">
@@ -152,7 +152,7 @@
                 <label class="col-sm-2 control-label">收费</label>
                 <div class="col-sm-10">
                   <select v-model="section.charge" class="form-control">
-                    <option v-for="opt in CHARGE" v-bind:value="opt.key">{{opt.value}}</option>
+                    <option v-for="opt in SECTION_CHARGE" v-bind:value="opt.key">{{opt.value}}</option>
                   </select>
                 </div>
               </div>
@@ -185,7 +185,7 @@
       return {
         section: {},
         sections: [],
-        CHARGE: [{key:"C",value:"收费"},{key:"F",value:"免费"}]
+        SECTION_CHARGE: SECTION_CHARGE
       }
     },
     mounted() {

@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import router from "./router"
 import axios from "axios"
-import {optionFilter} from "./filter/filter"
+import {optionFilter,optionObjectFilter} from "./filter/filter"
 
 axios.interceptors.request.use(function (config) {
   console.log("请求，", config);
@@ -16,7 +16,7 @@ axios.interceptors.response.use(function (response) {
 
 const app = createApp(App);
 app.config.globalProperties.$filters = {
-  optionFilter
+  optionObjectFilter
 }
 app.config.globalProperties.$ajax = axios;
 app.use(router)

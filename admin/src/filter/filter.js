@@ -18,6 +18,21 @@ function optionFilter(list,key){
   }
 }
 
+function optionObjectFilter(object,key){
+  if (!key || !object) {
+    return ''
+  } else {
+    let result = '';
+    for (let enums in object) {
+      if (key === object[enums]['key']) {
+        result = object[enums]['value']
+      }
+    }
+    return result;
+  }
+}
+
 export {
-  optionFilter
+  optionFilter,
+  optionObjectFilter
 }
