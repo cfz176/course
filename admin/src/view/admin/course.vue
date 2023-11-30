@@ -46,18 +46,18 @@
                         <span class="lbl"></span>
                     </label>
                 </td>
-                    <td class="center">{{course.id}}</td>
-                    <td class="center">{{course.name}}</td>
-                    <td class="center">{{course.summary}}</td>
-                    <td class="center">{{course.time}}</td>
-                    <td class="center">{{course.price}}</td>
-                    <td class="center">{{$filters.optionObjectFilter(COURSE_LEVEL,course.level)}}</td>
-                    <td class="center">{{$filters.optionObjectFilter(COURSE_CHARGE,course.charge)}}</td>
-                    <td class="center">{{$filters.optionObjectFilter(COURSE_STATUS,course.status)}}</td>
-                    <td class="center">{{course.enroll}}</td>
-                    <td class="center">{{course.sort}}</td>
-                    <td class="center">{{course.createAt}}</td>
-                    <td class="center">{{course.updateAt}}</td>
+                             <td class="center">{{course.id}}</td>
+                             <td class="center">{{course.name}}</td>
+                             <td class="center">{{course.summary}}</td>
+                             <td class="center">{{course.time}}</td>
+                             <td class="center">{{course.price}}</td>
+                             <td class="center">{{$filters.optionObjectFilter(COURSE_LEVEL,course.level)}}</td>
+                             <td class="center">{{$filters.optionObjectFilter(COURSE_CHARGE,course.charge)}}</td>
+                             <td class="center">{{$filters.optionObjectFilter(COURSE_STATUS,course.status)}}</td>
+                             <td class="center">{{course.enroll}}</td>
+                             <td class="center">{{course.sort}}</td>
+                             <td class="center">{{course.createAt}}</td>
+                             <td class="center">{{course.updateAt}}</td>
                 <td>
                     <div class="hidden-sm hidden-xs btn-group">
 
@@ -121,82 +121,82 @@
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">名称</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.name" class="form-control"
-                                                placeholder="请输入名称">
-                                     </div>
+                                        <input v-model="course.name" class="form-control"
+                                               placeholder="请输入名称">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">概述</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.summary" class="form-control"
-                                                placeholder="请输入概述">
-                                     </div>
+                                        <input v-model="course.summary" class="form-control"
+                                               placeholder="请输入概述">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">时长</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.time" class="form-control"
-                                                placeholder="请输入时长">
-                                     </div>
+                                        <input v-model="course.time" class="form-control"
+                                               placeholder="请输入时长">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">价格</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.price" class="form-control"
-                                                placeholder="请输入价格">
-                                     </div>
+                                        <input v-model="course.price" class="form-control"
+                                               placeholder="请输入价格">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">级别</label>
                                      <div class="col-sm-10">
-                                       <select v-model="course.level" class="form-control">
-                                         <option v-for="opt in COURSE_LEVEL" v-bind:value="opt.key">{{opt.value}}</option>
-                                       </select>
-                                     </div>
+                                        <select v-model="course.level" class="form-control">
+                                            <option v-for="opt in COURSE_LEVEL" v-bind:value="opt.key">{{opt.value}}</option>
+                                        </select>
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">收费</label>
                                      <div class="col-sm-10">
-                                       <select v-model="course.charge" class="form-control">
-                                         <option v-for="opt in COURSE_CHARGE" v-bind:value="opt.key">{{opt.value}}</option>
-                                       </select>
-                                     </div>
+                                        <select v-model="course.charge" class="form-control">
+                                            <option v-for="opt in COURSE_CHARGE" v-bind:value="opt.key">{{opt.value}}</option>
+                                        </select>
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">状态</label>
                                      <div class="col-sm-10">
-                                       <select v-model="course.status" class="form-control">
-                                         <option v-for="opt in COURSE_STATUS" v-bind:value="opt.key">{{opt.value}}</option>
-                                       </select>
-                                     </div>
+                                        <select v-model="course.status" class="form-control">
+                                            <option v-for="opt in COURSE_STATUS" v-bind:value="opt.key">{{opt.value}}</option>
+                                        </select>
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">报名数</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.enroll" class="form-control"
-                                                placeholder="请输入报名数">
-                                     </div>
+                                        <input v-model="course.enroll" class="form-control"
+                                               placeholder="请输入报名数">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">顺序</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.sort" class="form-control"
-                                                placeholder="请输入顺序">
-                                     </div>
+                                        <input v-model="course.sort" class="form-control"
+                                               placeholder="请输入顺序">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">创建时间</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.createAt" class="form-control"
-                                                placeholder="请输入创建时间">
-                                     </div>
+                                        <input v-model="course.createAt" class="form-control"
+                                               placeholder="请输入创建时间">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">修改时间</label>
                                      <div class="col-sm-10">
-                                         <input v-model="course.updateAt" class="form-control"
-                                                placeholder="请输入修改时间">
-                                     </div>
+                                        <input v-model="course.updateAt" class="form-control"
+                                               placeholder="请输入修改时间">
+                                    </div>
                                  </div>
                         </form>
                     </div>
@@ -223,6 +223,7 @@
       COURSE_LEVEL: COURSE_LEVEL,
       COURSE_CHARGE: COURSE_CHARGE,
       COURSE_STATUS: COURSE_STATUS,
+
     }
     },
     mounted() {

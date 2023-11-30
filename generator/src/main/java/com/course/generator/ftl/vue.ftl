@@ -38,7 +38,11 @@
                 </td>
                 <#list fieldList as field>
                      <#if field.nameHump != "createdAt" && field.nameHump != "updatedAt">
-                    <td class="center">{{${domain}.${field.nameHump}}}</td>
+                         <#if field.enums>
+                             <td class="center">{{$filters.optionObjectFilter(${field.enumsConst},${domain}.${field.nameHump})}}</td>
+                         <#else>
+                             <td class="center">{{${domain}.${field.nameHump}}}</td>
+                         </#if>
                      </#if>
                 </#list>
                 <td>
@@ -102,13 +106,19 @@
                     <div class="modal-body">
                         <form class="form-horizontal">
                             <#list fieldList as field>
-                                 <#if field.nameHump != "id" && field.nameHump != "createdAt" && field.nameHump != "updatedAt">
+                                <#if field.nameHump != "id" && field.nameHump != "createdAt" && field.nameHump != "updatedAt">
                                  <div class="form-group">
                                      <label class="col-sm-2 control-label">${field.nameCn}</label>
                                      <div class="col-sm-10">
-                                         <input v-model="${domain}.${field.nameHump}" class="form-control"
-                                                placeholder="请输入${field.nameCn}">
-                                     </div>
+                                    <#if field.enums>
+                                        <select v-model="${domain}.${field.nameHump}" class="form-control">
+                                            <option v-for="opt in ${field.enumsConst}" v-bind:value="opt.key">{{opt.value}}</option>
+                                        </select>
+                                    <#else>
+                                        <input v-model="${domain}.${field.nameHump}" class="form-control"
+                                               placeholder="请输入${field.nameCn}">
+                                    </#if>
+                                    </div>
                                  </div>
                                  </#if>
                             </#list>
@@ -133,7 +143,13 @@
     data: function () {
       return {
       ${domain}:{},
-      ${domain}s: []
+      ${domain}s: [],
+      <#list fieldList as field>
+        <#if field.enums>
+      ${field.enumsConst}: ${field.enumsConst},
+        </#if>
+      </#list>
+
     }
     },
     mounted() {
