@@ -27,8 +27,8 @@ public class ChapterService {
         //开启分页
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         //查询chapter列表
-        ChapterExample ChapterExample = new ChapterExample();
-        List<Chapter> chapterList = chapterMapper.selectByExample(ChapterExample);
+        ChapterExample chapterExample = new ChapterExample();
+        List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
         //获取分页数据
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapterList);
         //添加总条数到pageDto

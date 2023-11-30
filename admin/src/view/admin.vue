@@ -412,15 +412,23 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-              <li class="active" id="business-chapter-sidebar">
+              <li id="business-course-sidebar">
+                <router-link to="/business/course">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  课程管理
+                </router-link>
+
+                <b class="arrow"></b>
+              </li>
+              <li id="business-chapter-sidebar">
                 <router-link to="/business/chapter">
                   <i class="menu-icon fa fa-caret-right"></i>
                   章节管理
                 </router-link>
 
-                <b class="arrow"></b>
+              <b class="arrow"></b>
               </li>
-              <li class="active" id="business-section-sidebar">
+              <li id="business-section-sidebar">
                 <router-link to="/business/section">
                   <i class="menu-icon fa fa-caret-right"></i>
                   小节管理

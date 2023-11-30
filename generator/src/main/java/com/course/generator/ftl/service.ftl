@@ -26,25 +26,18 @@ public class ${Domain}Service {
     public void list(PageDto pageDto) {
         //开启分页
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
-        //查询${nameCn}列表
+        //查询${tableNameCn}列表
         ${Domain}Example ${domain}Example = new ${Domain}Example();
         <#list fieldList as field>
             <#if field.nameHump == "sort">
-        ${domain}Example.setOrderByClause("sort ace");
+        ${domain}Example.setOrderByClause("sort asc");
             </#if>
         </#list>
-        List<${Domain}> ${domain}List = ${domain}Mapper.selectByExample(${Domain}Example);
+        List<${Domain}> ${domain}List = ${domain}Mapper.selectByExample(${domain}Example);
         //获取分页数据
         PageInfo<${Domain}> pageInfo = new PageInfo<>(${domain}List);
         //添加总条数到pageDto
         pageDto.setTotal(pageInfo.getTotal());
-        // ArrayList <${Domain}Dto> ${domain}DtoList = new ArrayList<>();
-        // for (int i = 0, l = ${domain}List.size(); i < l; i++){
-        // ${Domain} ${domain} = ${domain}List.get(i);
-        // ${Domain}Dto ${domain}Dto = new ${Domain}Dto();
-        // BeanUtils.copyProperties(${domain}, ${domain}Dto);
-        // ${domain}DtoList.add(${domain}Dto);
-        // }
         //添加数据到pageDto
         List <${Domain}Dto> ${domain}DtoList = BeanCopyUtils.copyBeanList(${domain}List, ${Domain}Dto.class);
         pageDto.setList(${domain}DtoList);

@@ -12,6 +12,11 @@
       </button>
     </p>
 
+    <!--分页插件-->
+    <p>
+      <Pagination ref="pagination" v-bind:list="list"></Pagination>
+    </p>
+
     <!--小节列表-->
     <table id="simple-table" class="table  table-bordered table-hover">
       <thead>
@@ -30,8 +35,6 @@
         <th>时长</th>
         <th>收费</th>
         <th>顺序</th>
-
-
         <th>操作</th>
       </tr>
       </thead>
@@ -96,11 +99,6 @@
       </tr>
       </tbody>
     </table>
-
-    <!--分页插件-->
-    <p>
-      <Pagination ref="pagination" v-bind:list="list"></Pagination>
-    </p>
 
     <!--新增模态框-->
     <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
