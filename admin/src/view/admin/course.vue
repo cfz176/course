@@ -12,97 +12,46 @@
             </button>
         </p>
 
-        <!--课程列表-->
-        <table id="simple-table" class="table  table-bordered table-hover">
-            <thead>
-            <tr>
-                <th class="center">
-                    <label class="pos-rel">
-                        <input type="checkbox" class="ace"/>
-                        <span class="lbl"></span>
-                    </label>
-                </th>
-                <th>id</th>
-                <th>名称</th>
-                <th>概述</th>
-                <th>时长</th>
-                <th>价格</th>
-                <th>封面</th>
-                <th>级别</th>
-                <th>收费</th>
-                <th>状态</th>
-                <th>报名数</th>
-                <th>顺序</th>
-                <th>创建时间</th>
-                <th>修改时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
+      <div class="row">
+        <div v-for="course in courses" class="col-md-4">
+          <div class="thumbnail search-thumbnail">
+            <img v-show="!course.image" class="media-object" src="/static/image/courseImg.jpg" />
+            <img v-show="course.image" class="media-object" src="{{course.image}}" />
+            <div class="caption">
+              <div class="clearfix">
+                <span class="pull-right label label-primary info-label">
+                   {{$filters.optionObjectFilter(COURSE_LEVEL,course.level)}}
+                </span>
+                <span class="pull-right label label-primary info-label">
+                  {{$filters.optionObjectFilter(COURSE_CHARGE,course.charge)}}
+                </span>
+                <span class="pull-right label label-primary info-label">
+                  {{$filters.optionObjectFilter(COURSE_STATUS,course.status)}}
+                </span>
+              </div>
 
-            <tbody>
-            <tr v-for="course in courses">
-                <td class="center">
-                    <label class="pos-rel">
-                        <input type="checkbox" class="ace"/>
-                        <span class="lbl"></span>
-                    </label>
-                </td>
-                             <td class="center">{{course.id}}</td>
-                             <td class="center">{{course.name}}</td>
-                             <td class="center">{{course.summary}}</td>
-                             <td class="center">{{course.time}}</td>
-                             <td class="center">{{course.price}}</td>
-                             <td class="center">{{course.image}}</td>
-                             <td class="center">{{$filters.optionObjectFilter(COURSE_LEVEL,course.level)}}</td>
-                             <td class="center">{{$filters.optionObjectFilter(COURSE_CHARGE,course.charge)}}</td>
-                             <td class="center">{{$filters.optionObjectFilter(COURSE_STATUS,course.status)}}</td>
-                             <td class="center">{{course.enroll}}</td>
-                             <td class="center">{{course.sort}}</td>
-                             <td class="center">{{course.createAt}}</td>
-                             <td class="center">{{course.updateAt}}</td>
-                <td>
-                    <div class="hidden-sm hidden-xs btn-group">
-
-                        <button v-on:click="edit(course)" class="btn btn-xs btn-info">
-                            <i class="ace-icon fa fa-pencil bigger-120"></i>
-                        </button>
-
-                        <button v-on:click="del(course.id)" class="btn btn-xs btn-danger">
-                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                        </button>
-
-                    </div>
-
-                    <div class="hidden-md hidden-lg">
-                        <div class="inline pos-rel">
-                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"
-                                    data-position="auto">
-                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																			<span class="green">
-																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																			</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																			<span class="red">
-																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																			</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+              <h3 class="search-title">
+                <a href="#" class="blue">{{course.name}}</a>
+              </h3>
+              <p>
+                <span class="blue bolder bigger-150">{{course.price}}&nbsp;<i class="fa fa-rmb"></i></span>
+              </p>
+              <p>{{course.summary}}</p>
+              <p>
+                <span class="badge badge-danger">时长:{{course.time}}</span>
+              </p>
+              <p>
+                <button v-on:click="edit(course)" class="btn btn-white btn-info btn-bold btn-round" >
+                  修改
+                </button>
+                <button v-on:click="edit(course)" class="btn btn-white btn-warning btn-round" >
+                  删除
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
         <!--分页插件-->
         <p>
@@ -316,5 +265,7 @@
 </script>
 
 <style scoped>
-
+  .caption h3{
+    font-size: 20px;
+  }
 </style>
