@@ -52,6 +52,8 @@ public class CourseController {
         ValidatorUtil.length(courseDto.getName(),"名称",1,50);
         //判断概述长度是否合法
         ValidatorUtil.length(courseDto.getSummary(),"概述",1,2000);
+        //判断封面长度是否合法
+        ValidatorUtil.length(courseDto.getImage(),"封面",1,200);
         //判断级别长度是否合法
         ValidatorUtil.length(courseDto.getLevel(),"级别",1,100);
         //新增章节

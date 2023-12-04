@@ -7,6 +7,7 @@
     <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="time" jdbcType="INTEGER" property="time" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="charge" jdbcType="CHAR" property="charge" />
     <result column="status" jdbcType="CHAR" property="status" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, summary, `time`, price, `level`, charge, `status`, enroll, sort, create_at, 
-    update_at
+    id, `name`, summary, `time`, price, image, `level`, charge, `status`, enroll, sort, 
+    create_at, update_at
   </sql>
   <select id="selectByExample" parameterType="com.course.server.entity.CourseExample" resultMap="BaseResultMap">
     select
@@ -109,13 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.course.server.entity.Course">
     insert into course (id, `name`, summary, 
-      `time`, price, `level`, 
-      charge, `status`, enroll, sort, 
-      create_at, update_at)
+      `time`, price, image, 
+      `level`, charge, `status`, enroll, 
+      sort, create_at, update_at
+      )
     values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
-      #{time,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{level,jdbcType=VARCHAR}, 
-      #{charge,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{enroll,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP})
+      #{time,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{image,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{charge,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{enroll,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.course.server.entity.Course">
     insert into course
@@ -134,6 +137,9 @@
       </if>
       <if test="price != null">
         price,
+      </if>
+      <if test="image != null">
+        image,
       </if>
       <if test="level != null">
         `level`,
@@ -172,6 +178,9 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
       </if>
       <if test="level != null">
         #{level,jdbcType=VARCHAR},
@@ -220,6 +229,9 @@
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
       </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
       <if test="record.level != null">
         `level` = #{record.level,jdbcType=VARCHAR},
       </if>
@@ -253,6 +265,7 @@
       summary = #{record.summary,jdbcType=VARCHAR},
       `time` = #{record.time,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DECIMAL},
+      image = #{record.image,jdbcType=VARCHAR},
       `level` = #{record.level,jdbcType=VARCHAR},
       charge = #{record.charge,jdbcType=CHAR},
       `status` = #{record.status,jdbcType=CHAR},
@@ -278,6 +291,9 @@
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
       </if>
       <if test="level != null">
         `level` = #{level,jdbcType=VARCHAR},
@@ -309,6 +325,7 @@
       summary = #{summary,jdbcType=VARCHAR},
       `time` = #{time,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
+      image = #{image,jdbcType=VARCHAR},
       `level` = #{level,jdbcType=VARCHAR},
       charge = #{charge,jdbcType=CHAR},
       `status` = #{status,jdbcType=CHAR},

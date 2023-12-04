@@ -14,6 +14,8 @@ public class Course {
 
     private BigDecimal price;
 
+    private String image;
+
     private String level;
 
     private String charge;
@@ -66,6 +68,14 @@ public class Course {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getLevel() {
@@ -135,6 +145,7 @@ public class Course {
         sb.append(", summary=").append(summary);
         sb.append(", time=").append(time);
         sb.append(", price=").append(price);
+        sb.append(", image=").append(image);
         sb.append(", level=").append(level);
         sb.append(", charge=").append(charge);
         sb.append(", status=").append(status);

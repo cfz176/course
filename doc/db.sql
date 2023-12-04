@@ -6,6 +6,7 @@ create table course(
     summary varchar(2000) comment '概述',
     time int default 0 comment '时长|单位秒',
     price decimal(8,2) default 0.00 comment '价格',
+    image varchar(200) comment '封面',
     level varchar (100) comment '级别|枚举[CourseLevelEnum]ONE("1","初级"）,TOW("2","中级"）,THREE("","高级"）',
     charge char(1) comment '收费|枚举[CourseChargeEnum]CHARGE("C","收费"),FREE("F","免费")',
     status char(1) comment '状态|枚举[CourseStatusEnum]PUBLISH("P","发布"),DRAF("D","草稿")',

@@ -27,15 +27,19 @@ public class CourseDto{
      */
      private BigDecimal price;
      /**
-     * 级别|ONE("1","初级"）,TOW("2","中级"）,THREE("","高级"）
+     * 封面
+     */
+     private String image;
+     /**
+     * 级别|枚举[CourseLevelEnum]ONE("1","初级"）,TOW("2","中级"）,THREE("","高级"）
      */
      private String level;
      /**
-     * 收费|CHARGE("C","收费"),FREE("F","免费")
+     * 收费|枚举[CourseChargeEnum]CHARGE("C","收费"),FREE("F","免费")
      */
      private String charge;
      /**
-     * 状态|PUBLISH("P","发布"),DRAF("D","草稿")
+     * 状态|枚举[CourseStatusEnum]PUBLISH("P","发布"),DRAF("D","草稿")
      */
      private String status;
      /**
@@ -71,6 +75,9 @@ public class CourseDto{
     }
     public void setPrice(BigDecimal price){
         this.price = price;
+    }
+    public void setImage(String image){
+        this.image = image;
     }
     public void setLevel(String level){
         this.level = level;
@@ -109,6 +116,9 @@ public class CourseDto{
     public BigDecimal getPrice(){
         return this.price;
     }
+    public String getImage(){
+        return this.image;
+    }
     public String getLevel(){
         return this.level;
     }
@@ -141,6 +151,7 @@ public class CourseDto{
         sb.append(",summary = ").append(summary);
         sb.append(",time = ").append(time);
         sb.append(",price = ").append(price);
+        sb.append(",image = ").append(image);
         sb.append(",level = ").append(level);
         sb.append(",charge = ").append(charge);
         sb.append(",status = ").append(status);

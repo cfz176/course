@@ -34,13 +34,6 @@ public class CourseService {
         PageInfo<Course> pageInfo = new PageInfo<>(courseList);
         //添加总条数到pageDto
         pageDto.setTotal(pageInfo.getTotal());
-        // ArrayList <CourseDto> courseDtoList = new ArrayList<>();
-        // for (int i = 0, l = courseList.size(); i < l; i++){
-        // Course course = courseList.get(i);
-        // CourseDto courseDto = new CourseDto();
-        // BeanUtils.copyProperties(course, courseDto);
-        // courseDtoList.add(courseDto);
-        // }
         //添加数据到pageDto
         List <CourseDto> courseDtoList = BeanCopyUtils.copyBeanList(courseList, CourseDto.class);
         pageDto.setList(courseDtoList);

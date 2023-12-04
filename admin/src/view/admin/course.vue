@@ -27,6 +27,7 @@
                 <th>概述</th>
                 <th>时长</th>
                 <th>价格</th>
+                <th>封面</th>
                 <th>级别</th>
                 <th>收费</th>
                 <th>状态</th>
@@ -51,6 +52,7 @@
                              <td class="center">{{course.summary}}</td>
                              <td class="center">{{course.time}}</td>
                              <td class="center">{{course.price}}</td>
+                             <td class="center">{{course.image}}</td>
                              <td class="center">{{$filters.optionObjectFilter(COURSE_LEVEL,course.level)}}</td>
                              <td class="center">{{$filters.optionObjectFilter(COURSE_CHARGE,course.charge)}}</td>
                              <td class="center">{{$filters.optionObjectFilter(COURSE_STATUS,course.status)}}</td>
@@ -144,6 +146,13 @@
                                      <div class="col-sm-10">
                                         <input v-model="course.price" class="form-control"
                                                placeholder="请输入价格">
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label class="col-sm-2 control-label">封面</label>
+                                     <div class="col-sm-10">
+                                        <input v-model="course.image" class="form-control"
+                                               placeholder="请输入封面">
                                     </div>
                                  </div>
                                  <div class="form-group">
@@ -263,6 +272,7 @@
           || !Validator.require(_this.course.name, "名称")
           || !Validator.length(_this.course.name, "名称", 1, 50)
           || !Validator.length(_this.course.summary, "概述", 1, 2000)
+          || !Validator.length(_this.course.image, "封面", 1, 200)
           || !Validator.length(_this.course.level, "级别", 1, 100)
         ) {
           return
