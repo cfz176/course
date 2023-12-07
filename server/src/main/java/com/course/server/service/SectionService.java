@@ -13,6 +13,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
@@ -52,6 +53,7 @@ public class SectionService {
      * 保存章节
      * @param sectionDto
      */
+    @Transactional
     public void save(SectionDto sectionDto) {
         //dto转换实体
         Section section = BeanCopyUtils.copyBean(sectionDto, Section.class);
