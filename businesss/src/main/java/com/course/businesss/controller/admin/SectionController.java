@@ -3,6 +3,7 @@ package com.course.businesss.controller.admin;
 import com.course.server.dto.SectionDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
+import com.course.server.dto.SectionPageDto;
 import com.course.server.service.SectionService;
 import com.course.server.utils.ValidatorUtil;
 import org.slf4j.Logger;
@@ -25,16 +26,18 @@ public class SectionController {
     /**
      * 查询章节列表
      *
-     * @param pageDto
+     * @param sectionPageDto
      * @return
      */
     @PostMapping("/list")
-    public ResponseDto<PageDto> section(@RequestBody PageDto pageDto) {
+    public ResponseDto<PageDto> section(@RequestBody SectionPageDto sectionPageDto) {
+        //chapterId不能为空
+        ValidatorUtil.require(sectionPageDto.getChapterId(),"章节名");
         //查询章节列表
-        sectionService.list(pageDto);
+        sectionService.list(sectionPageDto);
         //设置返回值
         ResponseDto<PageDto> responseDto = new ResponseDto<>();
-        responseDto.setContent(pageDto);
+        responseDto.setContent(sectionPageDto);
         return responseDto;
     }
 

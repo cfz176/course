@@ -1,7 +1,7 @@
 package com.course.server.service;
 
 import com.course.server.dto.ChapterDto;
-import com.course.server.dto.PageDto;
+import com.course.server.dto.ChapterPageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.entity.Chapter;
 import com.course.server.entity.ChapterExample;
@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -22,27 +23,29 @@ public class ChapterService {
     @Autowired
     private ChapterMapper chapterMapper;
 
-    //查询大章列表
-    public void list(PageDto pageDto) {
+    /**
+     * 查询大章列表
+     * @param chapterPageDto
+     */
+    public void list(ChapterPageDto chapterPageDto) {
         //开启分页
-        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
+        PageHelper.startPage(chapterPageDto.getPage(), chapterPageDto.getSize());
         //查询chapter列表
         ChapterExample chapterExample = new ChapterExample();
+        ChapterExample.Criteria criteria = chapterExample.createCriteria();
+        //判断是否携带courseId
+        if (!StringUtils.isEmpty(chapterPageDto.getCourseId())) {
+            //使用courseId作为条件查询
+            criteria.andCourseIdEqualTo(chapterPageDto.getCourseId());
+        }
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
         //获取分页数据
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapterList);
         //添加总条数到pageDto
-        pageDto.setTotal(pageInfo.getTotal());
-//        ArrayList<ChapterDto> chapterDtoList = new ArrayList<>();
-//        for (int i = 0, l = chapterList.size(); i < l; i++){
-//            Chapter chapter = chapterList.get(i);
-//            ChapterDto chapterDto = new ChapterDto();
-//            BeanUtils.copyProperties(chapter, chapterDto);
-//            chapterDtoList.add(chapterDto);
-//        }
+        chapterPageDto.setTotal(pageInfo.getTotal());
         //添加数据到pageDto
         List<ChapterDto> chapterDtoList = BeanCopyUtils.copyBeanList(chapterList, ChapterDto.class);
-        pageDto.setList(chapterDtoList);
+        chapterPageDto.setList(chapterDtoList);
     }
 
     /**

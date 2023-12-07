@@ -1,6 +1,7 @@
 package com.course.businesss.controller.admin;
 
 import com.course.server.dto.ChapterDto;
+import com.course.server.dto.ChapterPageDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
@@ -9,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.validation.Validator;
 
 /**
  * 章节
@@ -25,16 +28,18 @@ public class ChapterController {
     /**
      * 查询章节列表
      *
-     * @param pageDto
+     * @param chapterPageDto
      * @return
      */
     @PostMapping("/list")
-    public ResponseDto<PageDto> chapter(@RequestBody PageDto pageDto) {
+    public ResponseDto<PageDto> chapter(@RequestBody ChapterPageDto chapterPageDto) {
+        //courseId不能为空
+        ValidatorUtil.require(chapterPageDto.getCourseId(),"课程名");
         //查询章节列表
-        chapterService.list(pageDto);
+        chapterService.list(chapterPageDto);
         //设置返回值
         ResponseDto<PageDto> responseDto = new ResponseDto<>();
-        responseDto.setContent(pageDto);
+        responseDto.setContent(chapterPageDto);
         return responseDto;
     }
 

@@ -1,5 +1,14 @@
 <template>
   <div>
+    <h3 class="blue">
+      <router-link to="/business/course">
+        <i class="ace-icon fa fa-arrow-left">&nbsp;{{course.name}}课程：</i>
+      </router-link>
+      <router-link to="/business/chapter">
+        <i class="ace-icon fa fa-arrow-left">&nbsp;{{chapter.name}}大章</i>
+      </router-link>
+    </h3>
+    <hr>
     <p>
       <button v-on:click="list(1)" class="btn btn-white btn-info  btn-round">
         <i class="ace-icon fa fa-refresh bigger-120 blue"></i>
@@ -121,15 +130,13 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">课程</label>
                 <div class="col-sm-10">
-                  <input v-model="section.courseId" class="form-control"
-                         placeholder="请输入课程">
+                  {{course.name}}
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">章节</label>
                 <div class="col-sm-10">
-                  <input v-model="section.chapterId" class="form-control"
-                         placeholder="请输入章节">
+                  {{chapter.name}}
                 </div>
               </div>
               <div class="form-group">
@@ -183,11 +190,21 @@
       return {
         section: {},
         sections: [],
-        SECTION_CHARGE: SECTION_CHARGE
+        SECTION_CHARGE: SECTION_CHARGE,
+        chapter: {},
+        course: {}
       }
     },
     mounted() {
       let _this = this;
+      var course = SessionStorage.get("course") || {};
+      var chapter = SessionStorage.get("chapter") || {};
+      if (Tool.isEmpty(chapter) || Tool.isEmpty(course)) {
+        _this.$router.push("/welcome")
+        return
+      }
+      _this.chapter = chapter;
+      _this.course = course;
       _this.list(1);
     },
     methods: {
@@ -226,8 +243,12 @@
         ) {
           return
         }
+
+        _this.section.courseId = _this.course.id
+        _this.section.chapterId = _this.chapter.id
+
         //加载框显示
-        Loading.show();
+
         _this.$ajax.post(process.env.VUE_APP_SERVER + "/business/admin/section/save", _this.section)
           .then((respond) => {
             let resp = respond.data;
@@ -251,11 +272,14 @@
       /*查询小节列表*/
       list(page) {
         let _this = this;
+        Loading.show();
         _this.$ajax.post(process.env.VUE_APP_SERVER + "/business/admin/section/list", {
           page: page,
-          size: _this.$refs.pagination.size
+          size: _this.$refs.pagination.size,
+          chapterId: _this.chapter.id
         }).then((respond) => {
           let resp = respond.data;
+          Loading.hide();
           _this.sections = resp.content.list;
           _this.$refs.pagination.render(page, resp.content.total);
         })
@@ -265,5 +289,11 @@
 </script>
 
 <style scoped>
-
+  h3{
+    margin-top: 0px;
+  }
+  hr{
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
 </style>

@@ -41,10 +41,13 @@
                 <span class="badge badge-danger">时长:{{course.time}}</span>
               </p>
               <p>
+                <button v-on:click="toChapter(course)" class="btn btn-white btn-info btn-bold btn-round" >
+                  大章
+                </button>
                 <button v-on:click="edit(course)" class="btn btn-white btn-info btn-bold btn-round" >
                   修改
                 </button>
-                <button v-on:click="edit(course)" class="btn btn-white btn-warning btn-round" >
+                <button v-on:click="del(course.id)" class="btn btn-white btn-warning btn-round" >
                   删除
                 </button>
               </p>
@@ -259,7 +262,13 @@
           _this.courses = resp.content.list;
           _this.$refs.pagination.render(page, resp.content.total);
         })
-      }
+      },
+      /*跳转指定课程章节*/
+      toChapter(course) {
+        let _this = this;
+        SessionStorage.set("course", course);
+        _this.$router.push("/business/chapter");
+      },
     }
   }
 </script>

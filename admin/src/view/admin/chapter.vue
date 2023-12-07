@@ -1,6 +1,17 @@
 <template>
   <div>
+    <h3 class="blue">
+      <router-link to="/business/course">
+        <i class="ace-icon fa fa-arrow-left">&nbsp;{{course.name}}课程</i>
+      </router-link>
+    </h3>
+    <hr>
     <p>
+      <router-link to="/business/course" class="btn btn-white btn-info  btn-round">
+        <i class="ace-icon fa fa-arrow-circle-left"></i>
+        选择课程
+      </router-link>
+      &nbsp;
       <button v-on:click="list(1)" class="btn btn-white btn-info  btn-round">
         <i class="ace-icon fa fa-refresh bigger-120 blue"></i>
         刷新
@@ -10,11 +21,6 @@
         <i class="ace-icon fa fa-edit bigger-120 blue"></i>
         新增
       </button>
-    </p>
-
-    <!--分页插件-->
-    <p>
-      <Pagination ref="pagination" v-bind:list="list"></Pagination>
     </p>
 
     <!--章节列表-->
@@ -49,15 +55,15 @@
 
         <td>
           <div class="hidden-sm hidden-xs btn-group">
-
-            <button v-on:click="edit(chapter)" class="btn btn-xs btn-info">
-              <i class="ace-icon fa fa-pencil bigger-120"></i>
+            <button v-on:click="toSection(chapter)" name="tButton" class="btn btn-white btn-info btn-bold btn-round" >
+              小节
             </button>
-
-            <button v-on:click="del(chapter.id)" class="btn btn-xs btn-danger">
-              <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            <button v-on:click="edit(chapter)" name="tButton" class="btn btn-white btn-info btn-bold btn-round" >
+              修改
             </button>
-
+            <button v-on:click="del(chapter.id)" name="tButton" class="btn btn-white btn-warning btn-round" >
+              删除
+            </button>
           </div>
 
           <div class="hidden-md hidden-lg">
@@ -92,6 +98,11 @@
       </tbody>
     </table>
 
+    <!--分页插件-->
+    <p>
+      <Pagination ref="pagination" v-bind:list="list"></Pagination>
+    </p>
+
     <!--新增模态框-->
     <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -104,15 +115,15 @@
           <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
-                <label class="col-sm-2 control-label">课程名</label>
+                <label class="col-sm-2 control-label">章节名</label>
                 <div class="col-sm-10">
                   <input v-model="chapter.name" class="form-control" placeholder="请输入课程">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">课程编号</label>
+                <label class="col-sm-2 control-label">所属课程</label>
                 <div class="col-sm-10">
-                  <input v-model="chapter.courseId" class="form-control" placeholder="请输入课程编号">
+                  <p class="form-control-static">{{course.name}}</p>
                 </div>
               </div>
             </form>
@@ -136,11 +147,19 @@
     data: function () {
       return {
         chapter: {},
-        chapters: []
+        chapters: [],
+        course: {}
       }
     },
     mounted() {
       let _this = this;
+      var course = SessionStorage.get("course") || {};
+      if (Tool.isEmpty(course)) {
+        _this.$router.push('/welcome');
+        return
+      }
+      _this.course = course;
+      console.log(course.name)
       _this.list(1);
     },
     methods: {
@@ -168,16 +187,24 @@
         _this.chapter = $.extend({}, chapter);
         $("#form-modal").modal("show")
       },
+      /*跳转到指定小节*/
+      toSection(chapter) {
+        let _this = this;
+        SessionStorage.set("chapter", chapter);
+        _this.$router.push("/business/section");
+      },
       /*点击保存*/
       save() {
         let _this = this;
 
         //保存校验
         if (!Validator.require(_this.chapter.name, "课程名")
-          || !Validator.require(_this.chapter.courseId, "课程号")
           || !Validator.length(_this.chapter.courseId, "课程号", 4, 8)) {
           return
         }
+
+        _this.chapter.courseId = _this.course.id
+
         //加载框显示
         Loading.show();
         _this.$ajax.post(process.env.VUE_APP_SERVER + "/business/admin/chapter/save", _this.chapter)
@@ -203,13 +230,16 @@
       /*查询章节列表*/
       list(page) {
         let _this = this;
+        Loading.show();
         _this.$ajax.post(process.env.VUE_APP_SERVER + "/business/admin/chapter/list", {
           page: page,
-          size: _this.$refs.pagination.size
+          size: _this.$refs.pagination.size,
+          courseId: _this.course.id,
         }).then((respond) => {
           let resp = respond.data;
           _this.chapters = resp.content.list;
           _this.$refs.pagination.render(page, resp.content.total);
+          Loading.hide();
         })
       }
     }
@@ -217,5 +247,11 @@
 </script>
 
 <style scoped>
-
+  h3{
+    margin-top: 0px;
+  }
+  hr{
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
 </style>
