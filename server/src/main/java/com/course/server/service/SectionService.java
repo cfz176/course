@@ -24,6 +24,9 @@ public class SectionService {
     @Autowired
     private SectionMapper sectionMapper;
 
+    @Autowired
+    private CourseService courseService;
+
     //查询大章列表
     public void list(SectionPageDto sectionPageDto) {
         //开启分页
@@ -46,8 +49,9 @@ public class SectionService {
      }
 
     /**
-    * @param sectionDto
-    */
+     * 保存章节
+     * @param sectionDto
+     */
     public void save(SectionDto sectionDto) {
         //dto转换实体
         Section section = BeanCopyUtils.copyBean(sectionDto, Section.class);
@@ -55,10 +59,11 @@ public class SectionService {
         if (ObjectUtils.isEmpty(sectionDto.getId())) {
         //为空 则新增
         insert(section);
-        } else if (!ObjectUtils.isEmpty(sectionDto.getId())) {
+        } else {
         //不为空 修改
         update(section);
         }
+        courseService.updateTime(sectionDto.getCourseId());
     }
 
     /**

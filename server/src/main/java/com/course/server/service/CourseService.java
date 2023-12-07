@@ -6,10 +6,13 @@ import com.course.server.dto.ResponseDto;
 import com.course.server.entity.Course;
 import com.course.server.entity.CourseExample;
 import com.course.server.mapper.CourseMapper;
+import com.course.server.mapper.bussiness.MyCourseMapper;
 import com.course.server.utils.BeanCopyUtils;
 import com.course.server.utils.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -19,8 +22,13 @@ import java.util.List;
 @Service
 public class CourseService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CourseService.class);
+
     @Autowired
     private CourseMapper courseMapper;
+
+    @Autowired
+    private MyCourseMapper myCourseMappers;
 
     //查询大章列表
     public void list(PageDto pageDto) {
@@ -86,5 +94,14 @@ public class CourseService {
         return ResponseDto.successResult();
         }
         return ResponseDto.errorResult();
+    }
+
+    /**
+     * 修改视频时长
+     * @param id
+     */
+    public void updateTime(String id) {
+        LOG.info("修改视频时长：{}", id);
+        myCourseMappers.updateTime(id);
     }
 }
