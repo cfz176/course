@@ -155,11 +155,12 @@
       let _this = this;
       var course = SessionStorage.get("course") || {};
       if (Tool.isEmpty(course)) {
-        _this.$router.push('/welcome');
+        _this.$router.push('/business/course');
+        Confirm.showRouter('请先选择课程','',function () {
+        })
         return
       }
       _this.course = course;
-      console.log(course.name)
       _this.list(1);
     },
     methods: {

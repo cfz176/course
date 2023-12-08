@@ -12,6 +12,11 @@
             </button>
         </p>
 
+      <!--分页插件-->
+      <p>
+        <Pagination ref="pagination" v-bind:list="list"></Pagination>
+      </p>
+
       <div class="row">
         <div v-for="course in courses" class="col-md-4">
           <div class="thumbnail search-thumbnail">
@@ -38,7 +43,7 @@
               </p>
               <p>{{course.summary}}</p>
               <p>
-                <span class="badge badge-danger">时长:{{course.time}}</span>
+                <span class="badge badge-danger">时长：{{$filters.formatSecond(course.time)}}</span>
               </p>
               <p>
                 <button v-on:click="toChapter(course)" class="btn btn-white btn-info btn-bold btn-round" >
@@ -55,11 +60,6 @@
           </div>
         </div>
       </div>
-
-        <!--分页插件-->
-        <p>
-            <Pagination ref="pagination" v-bind:list="list"></Pagination>
-        </p>
 
         <!--新增模态框-->
         <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">

@@ -28,7 +28,7 @@ public class SectionService {
     @Autowired
     private CourseService courseService;
 
-    //查询大章列表
+    //查询小节列表
     public void list(SectionPageDto sectionPageDto) {
         //开启分页
         PageHelper.startPage(sectionPageDto.getPage(), sectionPageDto.getSize());
@@ -50,7 +50,7 @@ public class SectionService {
      }
 
     /**
-     * 保存章节
+     * 保存小节
      * @param sectionDto
      */
     @Transactional
@@ -69,20 +69,20 @@ public class SectionService {
     }
 
     /**
-    * 新增章节
+    * 新增小节
     *
     * @param section
     */
     private void insert(Section section) {
-        //生成章节id
+        //生成小节id
         section.setId(UuidUtil.getShortUuid());
 
-        //新增章节
+        //新增小节
         sectionMapper.insert(section);
     }
 
     /**
-    * 修改章节
+    * 修改小节
     *
     * @param section
     */
@@ -91,7 +91,7 @@ public class SectionService {
     }
 
     /**
-    * 删除章节
+    * 删除小节
     * @param id
     */
     public ResponseDto delete(String id) {

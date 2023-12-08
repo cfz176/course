@@ -23,14 +23,14 @@ public class ${Domain}Controller {
     private ${Domain}Service ${domain}Service;
 
     /**
-     * 查询章节列表
+     * 查询${tableNameCn}列表
      *
      * @param pageDto
      * @return
      */
     @PostMapping("/list")
     public ResponseDto<PageDto> ${domain}(@RequestBody PageDto pageDto) {
-        //查询章节列表
+        //查询${tableNameCn}列表
         ${domain}Service.list(pageDto);
         //设置返回值
         ResponseDto<PageDto> responseDto = new ResponseDto<>();
@@ -39,7 +39,7 @@ public class ${Domain}Controller {
     }
 
     /**
-     * 保存章节 有ID为修改 无ID为新增
+     * 保存${tableNameCn} 有ID为修改 无ID为新增
      *
      * @param ${domain}Dto
      * @return
@@ -58,7 +58,7 @@ public class ${Domain}Controller {
             </#if>
         </#if>
         </#list>
-        //新增章节
+        //新增${tableNameCn}
         ${domain}Service.save(${domain}Dto);
         //设置返回值
         ResponseDto<${Domain}Dto> responseDto = new ResponseDto<>();
@@ -67,7 +67,7 @@ public class ${Domain}Controller {
     }
 
     /**
-     * 删除章节
+     * 删除${tableNameCn}
      * @param id
      * @return
      */

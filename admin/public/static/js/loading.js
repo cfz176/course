@@ -3,7 +3,7 @@ Loading = {
     $.blockUI({
       message: '<img src="../../static/image/loading.gif" />',
       css: {
-        zIndex: "10011",
+        zIndex: "1000",
         padding: "10px",
         left: "50%",
         width: "80px",

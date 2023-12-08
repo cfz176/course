@@ -5,6 +5,7 @@ import Welcome from './view/admin/welcome'
 import Course from './view/admin/course'
 import Chapter from './view/admin/chapter'
 import Section from './view/admin/section'
+import Category from './view/admin/category'
 
 const routes = [
   {
@@ -32,6 +33,10 @@ const routes = [
       path: 'business/section',
       name: 'business/section',
       component: Section,
+    },{
+      path: 'business/category',
+      name: 'business/category',
+      component: Category,
     }]
   }
 ];

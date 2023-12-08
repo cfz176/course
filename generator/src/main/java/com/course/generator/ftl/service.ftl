@@ -22,7 +22,7 @@ public class ${Domain}Service {
     @Autowired
     private ${Domain}Mapper ${domain}Mapper;
 
-    //查询大章列表
+    //查询${tableNameCn}列表
     public void list(PageDto pageDto) {
         //开启分页
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
@@ -60,7 +60,7 @@ public class ${Domain}Service {
     }
 
     /**
-    * 新增章节
+    * 新增${tableNameCn}
     *
     * @param ${domain}
     */
@@ -73,14 +73,14 @@ public class ${Domain}Service {
         ${domain}.setUpdatedAt(now)
             </#if>
         </#list>
-        //生成章节id
+        //生成${tableNameCn}id
         ${domain}.setId(UuidUtil.getShortUuid());
-        //新增章节
+        //新增${tableNameCn}
         ${domain}Mapper.insert(${domain});
     }
 
     /**
-    * 修改章节
+    * 修改${tableNameCn}
     *
     * @param ${domain}
     */
@@ -94,7 +94,7 @@ public class ${Domain}Service {
     }
 
     /**
-    * 删除章节
+    * 删除${tableNameCn}
     * @param id
     */
     public ResponseDto delete(String id) {

@@ -24,13 +24,13 @@ public class ChapterService {
     private ChapterMapper chapterMapper;
 
     /**
-     * 查询大章列表
+     * 查询章节列表
      * @param chapterPageDto
      */
     public void list(ChapterPageDto chapterPageDto) {
         //开启分页
         PageHelper.startPage(chapterPageDto.getPage(), chapterPageDto.getSize());
-        //查询chapter列表
+        //查询章节列表
         ChapterExample chapterExample = new ChapterExample();
         ChapterExample.Criteria criteria = chapterExample.createCriteria();
         //判断是否携带courseId

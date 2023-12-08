@@ -16,5 +16,20 @@ Confirm = {
         }
       }
     });
+  },
+
+  showRouter: function (title,msg, callback) {
+    Swal.fire({
+      title: title,
+      text: msg,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+    }).then(() => {
+          callback()
+    });
   }
 }

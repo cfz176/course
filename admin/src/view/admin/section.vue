@@ -5,7 +5,7 @@
         <i class="ace-icon fa fa-arrow-left">&nbsp;{{course.name}}课程：</i>
       </router-link>
       <router-link to="/business/chapter">
-        <i class="ace-icon fa fa-arrow-left">&nbsp;{{chapter.name}}大章</i>
+        <i class="ace-icon fa fa-arrow-left">&nbsp;{{chapter.name}}章节</i>
       </router-link>
     </h3>
     <hr>
@@ -199,8 +199,16 @@
       let _this = this;
       var course = SessionStorage.get("course") || {};
       var chapter = SessionStorage.get("chapter") || {};
-      if (Tool.isEmpty(chapter) || Tool.isEmpty(course)) {
-        _this.$router.push("/welcome")
+      if (Tool.isEmpty(course)) {
+        _this.$router.push('/business/course');
+          Confirm.showRouter('请先选择课程','',function () {
+          })
+          return
+      }
+      if (Tool.isEmpty(chapter)) {
+        _this.$router.push('/business/chapter');
+          Confirm.showRouter('请先选择章节','',function () {
+          })
         return
       }
       _this.chapter = chapter;
