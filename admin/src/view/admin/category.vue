@@ -10,9 +10,9 @@
                         刷新
                     </button>
                     &nbsp;
-                    <button v-on:click="add()" class="btn btn-white btn-info  btn-round">
+                    <button v-on:click="add1()" class="btn btn-white btn-info  btn-round">
                         <i class="ace-icon fa fa-edit bigger-120 blue"></i>
-                        新增
+                        新增一级分类
                     </button>
                 </p>
 
@@ -28,7 +28,7 @@
                     </thead>
 
                     <tbody>
-                    <tr v-for="category in level1" v-on:click="showLevel2(category)"  v-bind:class="{'active' : category.id === active.id}">
+                    <tr v-for="category in level1" v-on:click="showLevel2(category)"  v-bind:class="{'active' : category.id === actived.id}">
                         <td class="center">{{category.id}}</td>
                         <td class="center">{{category.name}}</td>
                         <td class="center">{{category.sort}}</td>
@@ -79,9 +79,9 @@
             </div>
             <div class="col-md-6">
                 <p>
-                    <button v-on:click="add()" class="btn btn-white btn-info  btn-round">
+                    <button v-on:click="add2()" class="btn btn-white btn-info  btn-round">
                         <i class="ace-icon fa fa-edit bigger-120 blue"></i>
-                        新增
+                        新增二级分类
                     </button>
                 </p>
 
@@ -160,10 +160,9 @@
                     <div class="modal-body">
                         <form class="form-horizontal">
                                  <div class="form-group">
-                                     <label class="col-sm-2 control-label">上级id</label>
+                                     <label class="col-sm-2 control-label">上级分类</label>
                                      <div class="col-sm-10">
-                                        <input v-model="category.parent" class="form-control"
-                                               placeholder="请输入上级id">
+                                       <p class="form-control-static">{{active.name || '无'}}</p>
                                     </div>
                                  </div>
                                  <div class="form-group">
@@ -204,7 +203,8 @@
       category: [],
       level1: [],
       level2: [],
-      active: [],
+      active: [],//显示控件
+      actived: [],//值操作控件
     }
     },
     mounted() {
@@ -263,11 +263,32 @@
             Loading.hide();
           })
       },
-      /*点击弹出新增框*/
-      add() {
+      /*点击弹出新增一级分类框*/
+      add1() {
         let _this = this;
-        _this.category = {};
+        _this.active = []
+        _this.category = {
+            parent: '000000'
+        };
         $("#form-modal").modal("show")
+      },
+      /*点击弹出新增二级分类框*/
+      add2() {
+        let _this = this;
+          if (Tool.isNotEmpty(_this.actived)) {
+              _this.active = _this.actived;
+          }
+        //一级分类未激活时不可添加
+        if (Tool.isEmpty(_this.actived)) {
+            //提示先选择上级分类
+            Toast.warning("请先选择一级分类");
+            return;
+        }
+          _this.category = {
+            parent: _this.actived.id
+          };
+          $("#form-modal").modal("show")
+
       },
       /*查询分类列表*/
       list() {
@@ -301,6 +322,7 @@
       showLevel2(category) {
         let _this = this;
         _this.active = category;
+        _this.actived = category;
         _this.level2 = category.child;
       }
     }
